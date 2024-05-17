@@ -1,0 +1,12 @@
+spring:
+    config:
+        import:
+            - classpath:config/application-db.properties
+    datasource:
+        url: ${spring.datasource.url}
+        username: ${spring.datasource.username}
+        password: ${spring.datasource.password}
+        driver-class-name: ${spring.datasource.driver-class-name}
+mybatis:
+    mapper-locations: classpath:/mappers/*.xml
+
