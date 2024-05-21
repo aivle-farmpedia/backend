@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ParmPediaApplication {
+public class FarmPediaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ParmPediaApplication.class, args);
+		SpringApplication.run(FarmPediaApplication.class, args);
 	}
 
 }
