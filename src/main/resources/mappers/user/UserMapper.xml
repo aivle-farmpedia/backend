@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.farm.pedia.user.mapper.UserMapper">
+
+    <insert id="save" parameterType="String">
+        INSERT INTO user(uuid) VALUES(#{uuid})
+    </insert>
+
+    <select id="findByUuid" parameterType="String" resultType="com.farm.pedia.user.domain.User">
+        SELECT * FROM user WHERE uuid = #{uuid}
+    </select>
+
+</mapper>
