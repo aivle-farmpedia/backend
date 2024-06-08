@@ -1,7 +1,7 @@
-package com.farm.pedia.search_history.controller;
+package com.farm.pedia.searchHistory.controller;
 
 import com.farm.pedia.auth.config.UserLogin;
-import com.farm.pedia.search_history.service.SearchHistoryService;
+import com.farm.pedia.searchHistory.service.SearchHistoryService;
 import com.farm.pedia.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

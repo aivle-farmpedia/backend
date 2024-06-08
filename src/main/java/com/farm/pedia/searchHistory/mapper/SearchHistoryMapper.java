@@ -1,6 +1,6 @@
-package com.farm.pedia.search_history.mapper;
+package com.farm.pedia.searchHistory.mapper;
 
-import com.farm.pedia.search_history.domain.SearchHistory;
+import com.farm.pedia.searchHistory.domain.SearchHistory;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

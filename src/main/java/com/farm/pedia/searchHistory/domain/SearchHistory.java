@@ -1,4 +1,4 @@
-package com.farm.pedia.search_history.domain;
+package com.farm.pedia.searchHistory.domain;
 
 import lombok.Getter;
 import lombok.Setter;

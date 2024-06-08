@@ -1,7 +1,7 @@
-package com.farm.pedia.search_history.service;
+package com.farm.pedia.searchHistory.service;
 
-import com.farm.pedia.search_history.domain.SearchHistory;
-import com.farm.pedia.search_history.mapper.SearchHistoryMapper;
+import com.farm.pedia.searchHistory.domain.SearchHistory;
+import com.farm.pedia.searchHistory.mapper.SearchHistoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.data.redis.core.RedisTemplate;
