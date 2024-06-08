@@ -32,6 +32,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("com.github.pagehelper:pagehelper-spring-boot-starter:1.3.0")
 }
 
 tasks.withType<Test> {
