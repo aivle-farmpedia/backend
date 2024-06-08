@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.farm.pedia.board.mapper.BoardMapper">
+
+    <insert id="save" parameterType="com.farm.pedia.board.domain.Board" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO board (title, content, user_id, category_id, state, created_at, updated_at)
+        VALUES (#{title}, #{content}, #{userId}, #{categoryId}, #{state}, #{createdAt}, #{updatedAt})
+    </insert>
+
+    <select id="findAll" resultType="com.farm.pedia.board.domain.Board">
+        SELECT id, title, content, user_id as userId, category_id as categoryId, state, created_at as createdAt, updated_at as updatedAt
+        FROM board
+        WHERE state = 0
+    </select>
+
+    <select id="findById" resultType="com.farm.pedia.board.domain.Board">
+        SELECT id, title, content, user_id as userId, category_id as categoryId, state, created_at as createdAt, updated_at as updateAt
+        FROM board
+        WHERE id = #{id}
+    </select>
+
+    <update id="update" parameterType="com.farm.pedia.board.domain.Board">
+        UPDATE board
+        SET title       = #{title},
+            content     = #{content},
+            updated_at  = #{updatedAt},
+            state       = #{state},
+            user_id     = #{userId},
+            category_id = #{categoryId}
+        WHERE id = #{id}
+    </update>
+
+    <update id="logicalDelete" parameterType="Long">
+        UPDATE board
+        SET state = 1
+        WHERE id = #{id} AND state = 0
+    </update>
+</mapper>
