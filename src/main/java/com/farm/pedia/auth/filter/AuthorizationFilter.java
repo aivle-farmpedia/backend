@@ -1,9 +1,5 @@
 package com.farm.pedia.auth.filter;
 
-import static org.springframework.http.HttpHeaders.*;
-
-import java.io.IOException;
-
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -11,17 +7,20 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
+@Component
 public class AuthorizationFilter implements Filter {
 
 	private static final String UUID_PATTERN = "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$";
 
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws
-		IOException,
-		ServletException {
-		HttpServletRequest request = (HttpServletRequest)servletRequest;
-		HttpServletResponse response = (HttpServletResponse)servletResponse;
+			IOException, ServletException {
+		HttpServletRequest request = (HttpServletRequest) servletRequest;
+		HttpServletResponse response = (HttpServletResponse) servletResponse;
 
 		String requestURI = request.getRequestURI();
 
@@ -30,7 +29,7 @@ public class AuthorizationFilter implements Filter {
 			return;
 		}
 
-		String uuid = request.getHeader(AUTHORIZATION);
+		String uuid = request.getHeader("Authorization");
 
 		if (uuid == null) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "uuid가 존재하지 않습니다");
