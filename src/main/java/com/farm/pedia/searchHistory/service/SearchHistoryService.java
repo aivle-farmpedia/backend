@@ -5,8 +5,8 @@ import com.farm.pedia.searchHistory.mapper.SearchHistoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 @Service
@@ -18,11 +18,9 @@ public class SearchHistoryService {
     private final SearchHistoryMapper searchHistoryMapper;
     private final RedisTemplate<String, String> redisTemplate;
 
+    @Transactional
     public void saveSearchKeyword(Long userId, String keyword) {
-        SearchHistory searchHistory = new SearchHistory();
-        searchHistory.setUserId(userId);
-        searchHistory.setKeyword(keyword);
-        searchHistory.setSearchedAt(LocalDateTime.now());
+        SearchHistory searchHistory = SearchHistory.of(keyword, userId);
         searchHistoryMapper.save(searchHistory);
 
         // Redis에 저장
