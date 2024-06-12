@@ -19,17 +19,23 @@ repositories {
     mavenCentral()
 }
 
+val springBootVersion = "3.2.5"
+val myBatisVersion = "3.0.3"
+val junitPlatformVersion = "1.8.2"
+
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3")
+    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis:$springBootVersion")
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:$myBatisVersion")
+    implementation("org.springframework.boot:spring-boot-starter-validation:$springBootVersion")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     runtimeOnly("com.mysql:mysql-connector-j")
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+    testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:$myBatisVersion")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:$junitPlatformVersion")
 }
 
 tasks.withType<Test> {
