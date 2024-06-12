@@ -33,6 +33,8 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     runtimeOnly("com.mysql:mysql-connector-j")
 
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("com.github.pagehelper:pagehelper-spring-boot-starter:1.3.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:$myBatisVersion")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:$junitPlatformVersion")
