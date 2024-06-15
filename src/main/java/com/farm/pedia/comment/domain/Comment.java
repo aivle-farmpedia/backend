@@ -2,6 +2,9 @@ package com.farm.pedia.comment.domain;
 
 import java.time.LocalDateTime;
 
+import com.farm.pedia.comment.exception.exceptions.CommentAlreadyDeletedException;
+import com.farm.pedia.comment.exception.exceptions.CommentAuthorOnlyException;
+
 import lombok.Getter;
 
 @Getter
@@ -51,13 +54,13 @@ public class Comment {
 
 	public void isAuthor(Long userId) {
 		if (!this.userId.equals(userId)) {
-			throw new IllegalArgumentException("작성자만 수정할 수 있습니다.");
+			throw new CommentAuthorOnlyException();
 		}
 	}
 
 	public void isDeleted() {
 		if (this.state == 1) {
-			throw new IllegalArgumentException("삭제된 댓글입니다.");
+			throw new CommentAlreadyDeletedException();
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package com.farm.pedia.config;
+package com.farm.pedia.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

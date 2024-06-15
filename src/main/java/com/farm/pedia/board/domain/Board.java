@@ -2,6 +2,9 @@ package com.farm.pedia.board.domain;
 
 import java.time.LocalDateTime;
 
+import com.farm.pedia.board.exception.exceptions.BoardAuthorOnlyException;
+import com.farm.pedia.board.exception.exceptions.BoardAlreadyDeletedException;
+
 import lombok.Getter;
 
 @Getter
@@ -42,13 +45,13 @@ public class Board {
 
 	public void isAuthor(Long userId) {
 		if (!this.userId.equals(userId)) {
-			throw new IllegalArgumentException("게시글 작성자만 가능합니다.");
+			throw new BoardAuthorOnlyException();
 		}
 	}
 
 	public void isDeleted() {
 		if (this.state == 1) {
-			throw new IllegalArgumentException("이미 삭제된 게시글입니다.");
+			throw new BoardAlreadyDeletedException();
 		}
 	}
 }

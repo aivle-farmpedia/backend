@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.farm.pedia.board.domain.Board;
 import com.farm.pedia.board.dto.request.BoardCreateRequest;
 import com.farm.pedia.board.dto.request.BoardUpdateRequest;
+import com.farm.pedia.board.exception.exceptions.BoardNotFoundException;
 import com.farm.pedia.board.mapper.BoardMapper;
 import com.farm.pedia.user.domain.User;
 import com.github.pagehelper.Page;
@@ -30,7 +31,7 @@ public class BoardService {
 
 	public Board findBoard(Long boardId) {
 		Board board = boardMapper.findById(boardId)
-			.orElseThrow(() -> new RuntimeException("Board not found"));
+			.orElseThrow(BoardNotFoundException::new);
 		board.isDeleted();
 		return board;
 	}
