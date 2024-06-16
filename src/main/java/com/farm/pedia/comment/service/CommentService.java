@@ -1,10 +1,12 @@
 package com.farm.pedia.comment.service;
 
 import com.farm.pedia.board.domain.Board;
+import com.farm.pedia.board.exception.exceptions.BoardNotFoundException;
 import com.farm.pedia.board.mapper.BoardMapper;
 import com.farm.pedia.comment.domain.Comment;
 import com.farm.pedia.comment.dto.request.CommentCreateRequest;
 import com.farm.pedia.comment.dto.request.CommentUpdateRequest;
+import com.farm.pedia.comment.exception.exceptions.CommentNotFoundException;
 import com.farm.pedia.comment.mapper.CommentMapper;
 import com.farm.pedia.user.domain.User;
 
@@ -31,7 +33,7 @@ public class CommentService {
 
 	public Comment findComment(Long commentId) {
 		Comment comment = commentMapper.findById(commentId)
-			.orElseThrow(() -> new RuntimeException("Comment not found"));
+			.orElseThrow(CommentNotFoundException::new);
 		comment.isDeleted();
 		return comment;
 	}
@@ -70,7 +72,7 @@ public class CommentService {
 
 	public void findBoard(Long boardId) {
 		Board board = boardMapper.findById(boardId)
-			.orElseThrow(() -> new RuntimeException("Board not found"));
+			.orElseThrow(BoardNotFoundException::new);
 		board.isDeleted();
 	}
 }

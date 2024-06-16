@@ -1,6 +1,7 @@
 package com.farm.pedia.user.service;
 
 import com.farm.pedia.user.domain.User;
+import com.farm.pedia.user.exception.exceptions.UserNotFoundException;
 import com.farm.pedia.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,6 @@ public class UserService {
     // User - UUID 조회
     public User findByUuid(String uuid) {
         return userMapper.findByUuid(uuid)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(UserNotFoundException::new);
     }
 }
