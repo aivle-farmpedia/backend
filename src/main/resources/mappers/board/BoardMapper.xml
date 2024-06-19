@@ -7,18 +7,18 @@
 <mapper namespace="com.farm.pedia.board.mapper.BoardMapper">
 
     <insert id="save" parameterType="com.farm.pedia.board.domain.Board" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO board (title, content, user_id, category_id, state, created_at, updated_at)
-        VALUES (#{title}, #{content}, #{userId}, #{categoryId}, #{state}, #{createdAt}, #{updatedAt})
+        INSERT INTO board (title, content, user_id, state, created_at, updated_at)
+        VALUES (#{title}, #{content}, #{userId}, #{state}, #{createdAt}, #{updatedAt})
     </insert>
 
     <select id="findAll" resultType="com.farm.pedia.board.domain.Board">
-        SELECT id, title, content, user_id as userId, category_id as categoryId, state, created_at as createdAt, updated_at as updatedAt
+        SELECT id, title, content, user_id as userId, state, created_at as createdAt, updated_at as updatedAt
         FROM board
         WHERE state = 0
     </select>
 
     <select id="findById" resultType="com.farm.pedia.board.domain.Board">
-        SELECT id, title, content, user_id as userId, category_id as categoryId, state, created_at as createdAt, updated_at as updateAt
+        SELECT id, title, content, user_id as userId, state, created_at as createdAt, updated_at as updateAt
         FROM board
         WHERE id = #{id}
     </select>
@@ -29,8 +29,7 @@
             content     = #{content},
             updated_at  = #{updatedAt},
             state       = #{state},
-            user_id     = #{userId},
-            category_id = #{categoryId}
+            user_id     = #{userId}
         WHERE id = #{id}
     </update>
 

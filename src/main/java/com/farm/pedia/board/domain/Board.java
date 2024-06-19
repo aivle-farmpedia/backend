@@ -14,32 +14,29 @@ public class Board {
 	private String title;
 	private String content;
 	private Long userId;
-	private Long categoryId;
 	private int state;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 
-	private Board(Long id, String title, String content, Long userId, Long categoryId, int state,
+	private Board(Long id, String title, String content, Long userId, int state,
 		LocalDateTime createdAt,
 		LocalDateTime updatedAt) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.userId = userId;
-		this.categoryId = categoryId;
 		this.state = state;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
 
-	public static Board of(String title, String content, Long userId, Long categoryId) {
-		return new Board(null, title, content, userId, categoryId, 0, LocalDateTime.now(), LocalDateTime.now());
+	public static Board of(String title, String content, Long userId) {
+		return new Board(null, title, content, userId, 0, LocalDateTime.now(), LocalDateTime.now());
 	}
 
-	public void update(String title, String content, Long categoryId) {
+	public void update(String title, String content) {
 		this.title = title;
 		this.content = content;
-		this.categoryId = categoryId;
 		this.updatedAt = LocalDateTime.now();
 	}
 
