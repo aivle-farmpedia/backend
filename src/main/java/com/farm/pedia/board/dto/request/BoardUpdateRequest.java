@@ -9,10 +9,7 @@ public record BoardUpdateRequest(
 	String title,
 
 	@NotBlank(message = "게시글 내용이 비어있습니다.")
-	String content,
-
-	@NotNull(message = "카테고리 ID가 비어있습니다.")
-	Long categoryId
+	String content
 ) {
 
 }

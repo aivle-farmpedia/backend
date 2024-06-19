@@ -23,7 +23,7 @@ public class BoardService {
 
 	public Board createBoard(User user, BoardCreateRequest boardCreateRequest) {
 		Board board = Board.of(boardCreateRequest.title(), boardCreateRequest.content(),
-			user.getId(), boardCreateRequest.categoryId());
+			user.getId());
 		boardMapper.save(board);
 
 		return board;
@@ -47,7 +47,7 @@ public class BoardService {
 		board.isDeleted();
 		board.isAuthor(user.getId());
 
-		board.update(boardUpdateRequest.title(), boardUpdateRequest.content(), boardUpdateRequest.categoryId());
+		board.update(boardUpdateRequest.title(), boardUpdateRequest.content());
 
 		boardMapper.update(board);
 	}
