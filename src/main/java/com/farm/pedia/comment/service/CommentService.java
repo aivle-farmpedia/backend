@@ -18,9 +18,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-
 @Service
 @RequiredArgsConstructor
 public class CommentService {

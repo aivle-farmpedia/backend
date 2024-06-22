@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.farm.pedia.comment.domain.Comment;
-import com.github.pagehelper.Page;
-
 @Mapper
 public interface CommentMapper {
 

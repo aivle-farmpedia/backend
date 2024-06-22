@@ -18,11 +18,9 @@ import com.farm.pedia.comment.dto.request.CommentCreateRequest;
 import com.farm.pedia.comment.dto.request.CommentUpdateRequest;
 import com.farm.pedia.comment.dto.response.CommentReadResponse;
 import com.farm.pedia.comment.dto.response.CommentWriteResponse;
-import com.farm.pedia.comment.dto.response.CommentsResponse;
 import com.farm.pedia.comment.service.CommentService;
 import com.farm.pedia.global.dto.response.PagedResponse;
 import com.farm.pedia.user.domain.User;
-import com.github.pagehelper.Page;
 
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
