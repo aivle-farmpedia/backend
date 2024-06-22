@@ -3,6 +3,7 @@ package com.farm.pedia.board.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,11 +19,11 @@ import com.farm.pedia.board.dto.request.BoardCreateRequest;
 import com.farm.pedia.board.dto.request.BoardUpdateRequest;
 import com.farm.pedia.board.dto.response.BoardReadResponse;
 import com.farm.pedia.board.dto.response.BoardWriteResponse;
-import com.farm.pedia.board.dto.response.BoardsResponse;
 import com.farm.pedia.board.service.BoardService;
+import com.farm.pedia.global.dto.response.PagedResponse;
 import com.farm.pedia.user.domain.User;
-import com.github.pagehelper.Page;
 
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -49,10 +50,10 @@ public class BoardController {
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public BoardsResponse findAll(@RequestParam(defaultValue = "1") int pageNum,
-		@RequestParam(defaultValue = "10") int pageSize) {
-		Page<Board> boards = boardService.findAll(pageNum, pageSize);
-		return BoardsResponse.from(boards);
+	public PagedResponse<Board> findAll(
+		@Min(value = 1, message = "페이지 값은 최소 1이어야 합니다.") @RequestParam(defaultValue = "1") int page,
+		@Min(value = 1, message = "크기 값은 최소 1이어야 합니다.") @RequestParam(defaultValue = "10") int size) {
+		return boardService.findAll(page, size);
 	}
 
 	@PutMapping("/{boardId}")

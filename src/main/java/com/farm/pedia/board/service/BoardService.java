@@ -9,9 +9,8 @@ import com.farm.pedia.board.dto.request.BoardCreateRequest;
 import com.farm.pedia.board.dto.request.BoardUpdateRequest;
 import com.farm.pedia.board.exception.exceptions.BoardNotFoundException;
 import com.farm.pedia.board.mapper.BoardMapper;
+import com.farm.pedia.global.dto.response.PagedResponse;
 import com.farm.pedia.user.domain.User;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,11 +35,14 @@ public class BoardService {
 		return board;
 	}
 
-	public Page<Board> findAll(int pageNum, int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);
-		return boardMapper.findAll();
-	}
+	public PagedResponse<Board> findAll(int page, int size) {
+		int offset = (page - 1) * size;
+		List<Board> boards = boardMapper.findAll(size, offset);
+		int totalElements = boardMapper.countAll();
+		int totalPages = (int) Math.ceil((double) totalElements / size);
 
+		return PagedResponse.of(boards, page, size, totalElements, totalPages);
+	}
 	public void updateBoard(User user, Long boardId, BoardUpdateRequest boardUpdateRequest) {
 		Board board = findBoard(boardId);
 
