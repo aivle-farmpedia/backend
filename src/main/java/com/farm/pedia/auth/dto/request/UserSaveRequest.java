@@ -1,4 +1,4 @@
-package com.farm.pedia.user.dto;
+package com.farm.pedia.auth.dto.request;
 
 import lombok.Getter;
 
