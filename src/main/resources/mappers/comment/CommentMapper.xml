@@ -19,8 +19,15 @@
                created_at as createdAt,
                updated_at as updatedAt
         FROM comment
-        WHERE state = 0
+        WHERE state = 0 AND board_id = #{boardId}
+        LIMIT #{limit} OFFSET #{offset}
 
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*)
+        FROM comment
+        WHERE state = 0 AND board_id = #{boardId}
     </select>
 
     <select id="findById" resultType="com.farm.pedia.comment.domain.Comment">

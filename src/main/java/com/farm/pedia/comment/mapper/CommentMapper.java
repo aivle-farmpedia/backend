@@ -1,5 +1,6 @@
 package com.farm.pedia.comment.mapper;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -14,7 +15,9 @@ public interface CommentMapper {
 
 	Optional<Comment> findById(Long id);
 
-	Page<Comment> findAll();
+	List<Comment> findAll(int limit, int offset, Long boardId);
+
+	int countAll(Long boardId);
 
 	void update(Comment comment);
 

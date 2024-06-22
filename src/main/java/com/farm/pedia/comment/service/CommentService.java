@@ -1,5 +1,7 @@
 package com.farm.pedia.comment.service;
 
+import java.util.List;
+
 import com.farm.pedia.board.domain.Board;
 import com.farm.pedia.board.exception.exceptions.BoardNotFoundException;
 import com.farm.pedia.board.mapper.BoardMapper;
@@ -8,6 +10,7 @@ import com.farm.pedia.comment.dto.request.CommentCreateRequest;
 import com.farm.pedia.comment.dto.request.CommentUpdateRequest;
 import com.farm.pedia.comment.exception.exceptions.CommentNotFoundException;
 import com.farm.pedia.comment.mapper.CommentMapper;
+import com.farm.pedia.global.dto.response.PagedResponse;
 import com.farm.pedia.user.domain.User;
 
 import lombok.RequiredArgsConstructor;
@@ -25,10 +28,14 @@ public class CommentService {
 	private final BoardMapper boardMapper;
 	private final CommentMapper commentMapper;
 
-	public Page<Comment> findAll(Long boardId, int pageNum, int pageSize) {
+	public PagedResponse<Comment> findAll(Long boardId, int page, int size) {
 		findBoard(boardId);
-		PageHelper.startPage(pageNum, pageSize);
-		return commentMapper.findAll();
+		int offset = (page - 1) * size;
+		List<Comment> boards = commentMapper.findAll(size, offset, boardId);
+		int totalElements = commentMapper.countAll(boardId);
+		int totalPages = (int) Math.ceil((double) totalElements / size);
+
+		return PagedResponse.of(boards, page, size, totalElements, totalPages);
 	}
 
 	public Comment findComment(Long commentId) {
