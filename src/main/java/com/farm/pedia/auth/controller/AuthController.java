@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.farm.pedia.user.domain.User;
-import com.farm.pedia.user.dto.request.UserSaveRequest;
-import com.farm.pedia.user.dto.response.UserSaveResponse;
+import com.farm.pedia.auth.dto.request.UserSaveRequest;
+import com.farm.pedia.auth.dto.response.UserSaveResponse;
 import com.farm.pedia.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;

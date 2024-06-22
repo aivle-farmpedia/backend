@@ -1,4 +1,4 @@
-package com.farm.pedia.user.dto.response;
+package com.farm.pedia.auth.dto.response;
 
 import com.farm.pedia.user.domain.User;
 
