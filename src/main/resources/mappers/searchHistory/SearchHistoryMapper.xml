@@ -6,4 +6,28 @@
         INSERT INTO search_history (keyword, searched_at, user_id)
         VALUES (#{keyword}, #{searchedAt}, #{userId})
     </insert>
+
+<!--  품종 명으로 검색  -->
+    <select id="searchVarietyByName" parameterType="String" resultType="String">
+        SELECT name
+        FROM crops
+        WHERE id IN (
+            SELECT crops_id
+            FROM variety
+            WHERE name = #{keyword}
+        )
+    </select>
+
+<!--  카테고리로 검색  -->
+    <select id="searchCropsByVarietyName" parameterType="String" resultType="String">
+        SELECT name
+        FROM crops
+        WHERE name = #{keyword}
+    </select>
+
 </mapper>
+
+
+
+
+
