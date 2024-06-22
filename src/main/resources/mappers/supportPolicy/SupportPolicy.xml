@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.farm.pedia.supportPolicy.mapper.SupportPolicyMapper">
+
+    <select id="findAll" resultType="com.farm.pedia.supportPolicy.domain.SimpleSupportPolicy">
+        SELECT id, title
+        FROM support_policy
+        WHERE applyEnd >= NOW()
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*)
+        FROM support_policy
+        WHERE applyEnd >= NOW()
+    </select>
+
+    <select id="findById" resultType="com.farm.pedia.supportPolicy.domain.SupportPolicy">
+        SELECT *
+        FROM support_policy
+        WHERE id = #{id} AND applyEnd >= NOW()
+    </select>
+</mapper>
