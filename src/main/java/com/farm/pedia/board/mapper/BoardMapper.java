@@ -7,8 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.farm.pedia.board.domain.Board;
-import com.github.pagehelper.Page;
-
 @Mapper
 public interface BoardMapper {
 
@@ -16,7 +14,9 @@ public interface BoardMapper {
 
 	Optional<Board> findById(@Param("id") Long id);
 
-	Page<Board> findAll();
+	List<Board> findAll(@Param("limit") int limit, @Param("offset") int offset);
+
+	int countAll();
 
 	void update(Board board);
 

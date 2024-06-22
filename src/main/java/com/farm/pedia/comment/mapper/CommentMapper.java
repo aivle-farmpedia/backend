@@ -1,12 +1,11 @@
 package com.farm.pedia.comment.mapper;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.farm.pedia.comment.domain.Comment;
-import com.github.pagehelper.Page;
-
 @Mapper
 public interface CommentMapper {
 
@@ -14,7 +13,9 @@ public interface CommentMapper {
 
 	Optional<Comment> findById(Long id);
 
-	Page<Comment> findAll();
+	List<Comment> findAll(int limit, int offset, Long boardId);
+
+	int countAll(Long boardId);
 
 	void update(Comment comment);
 

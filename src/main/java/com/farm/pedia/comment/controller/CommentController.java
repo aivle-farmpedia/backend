@@ -18,11 +18,11 @@ import com.farm.pedia.comment.dto.request.CommentCreateRequest;
 import com.farm.pedia.comment.dto.request.CommentUpdateRequest;
 import com.farm.pedia.comment.dto.response.CommentReadResponse;
 import com.farm.pedia.comment.dto.response.CommentWriteResponse;
-import com.farm.pedia.comment.dto.response.CommentsResponse;
 import com.farm.pedia.comment.service.CommentService;
+import com.farm.pedia.global.dto.response.PagedResponse;
 import com.farm.pedia.user.domain.User;
-import com.github.pagehelper.Page;
 
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -34,12 +34,11 @@ public class CommentController {
 
 	@GetMapping("/board/{boardId}")
 	@ResponseStatus(HttpStatus.OK)
-	public CommentsResponse findAll(
+	public PagedResponse<Comment> findAll(
 		@PathVariable Long boardId,
-		@RequestParam(defaultValue = "1") int pageNum,
-		@RequestParam(defaultValue = "10") int pageSize) {
-		Page<Comment> comments = commentService.findAll(boardId, pageNum, pageSize);
-		return CommentsResponse.from(comments);
+		@Min(value = 1, message = "페이지 값은 최소 1이어야 합니다.") @RequestParam(defaultValue = "1") int page,
+		@Min(value = 1, message = "크기 값은 최소 1이어야 합니다.") @RequestParam(defaultValue = "10") int size){
+		return commentService.findAll(boardId, page, size);
 	}
 
 	@PostMapping("/board/{boardId}")
