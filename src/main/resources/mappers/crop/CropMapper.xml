@@ -1,0 +1,39 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.farm.pedia.crop.mapper.CropMapper">
+
+    <select id="findCropDetails" resultType="com.farm.pedia.crop.domain.Crop">
+        SELECT c.id             AS cropId,
+               c.name           AS cropName,
+               y.area_per_yield AS areaPerYield,
+               y.time_per_yield AS timePerYield,
+               cultivation.url  AS cultivationUrl
+        FROM crops c
+                 LEFT JOIN yield y ON c.id = y.crops_id
+                 LEFT JOIN cultivation ON c.id = cultivation.crops_id
+        WHERE c.id = #{cropId}
+    </select>
+
+    <select id="findPriceEntries" resultType="com.farm.pedia.crop.domain.PriceEntry">
+        SELECT p.date  AS priceDate,
+               p.price AS price
+        FROM price_flow p
+        WHERE p.crops_id = #{cropId}
+    </select>
+
+    <select id="findVarieties" resultType="com.farm.pedia.crop.domain.Variety">
+        SELECT v.name      AS name,
+               v.purpose   AS purpose,
+               v.skill     AS skill,
+               v.image_url AS imageUrl
+        FROM variety v
+        WHERE v.crops_id = #{cropId}
+    </select>
+
+    <select id="findCropProcesses" resultType="com.farm.pedia.crop.domain.CropProcess">
+        SELECT cp.process_order AS processOrder,
+               cp.task          AS task,
+               cp.description   AS description
+        FROM crop_process cp
+        WHERE cp.crops_id = #{cropId}
+    </select>
+</mapper>
