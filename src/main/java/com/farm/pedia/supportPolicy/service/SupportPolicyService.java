@@ -4,13 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.farm.pedia.comment.domain.Comment;
 import com.farm.pedia.global.dto.response.PagedResponse;
 import com.farm.pedia.supportPolicy.domain.SimpleSupportPolicy;
 import com.farm.pedia.supportPolicy.domain.SupportPolicy;
 import com.farm.pedia.supportPolicy.mapper.SupportPolicyMapper;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 
 import lombok.RequiredArgsConstructor;
 
