@@ -15,6 +15,7 @@
         SELECT id, title, content, user_id as userId, state, created_at as createdAt, updated_at as updatedAt
         FROM board
         WHERE state = 0
+        ORDER BY created_at DESC
         LIMIT #{limit} OFFSET #{offset}
     </select>
 

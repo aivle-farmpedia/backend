@@ -6,6 +6,7 @@
         SELECT id, title
         FROM support_policy
         WHERE applyEnd >= NOW()
+        ORDER BY applyStart DESC
         LIMIT #{limit} OFFSET #{offset}
     </select>
 
