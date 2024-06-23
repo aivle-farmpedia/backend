@@ -35,6 +35,9 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
     @Transactional(readOnly = true)
     @Override
     public List<Map<String, Object>> autocomplete(String keyword) {
+        if (keyword.isEmpty()) {
+            return List.of();
+        }
         List<Map<String, Object>> varietyNames = searchHistoryMapper.searchVarietyName(keyword);
         List<Map<String, Object>> cropNames = searchHistoryMapper.searchCropsName(keyword);
         varietyNames.addAll(cropNames);
