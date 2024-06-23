@@ -5,8 +5,8 @@
 <mapper namespace="com.farm.pedia.comment.mapper.CommentMapper">
 
     <insert id="save" parameterType="com.farm.pedia.comment.domain.Comment" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO comment (content, user_id, board_id, state, created_at, updated_at)
-        VALUES (#{content}, #{userId}, #{boardId}, #{state}, #{createdAt}, #{updatedAt})
+        INSERT INTO comment (id, board_id, user_id, content, state, parent_id, created_at, updated_at)
+        VALUES (#{id}, #{boardId}, #{userId}, #{content}, #{state}, #{parentId}, #{createdAt}, #{updatedAt})
     </insert>
 
     <select id="findAll" resultType="com.farm.pedia.comment.domain.Comment">
