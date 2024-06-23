@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.farm.pedia.chatbot.mapper.MessageMapper">
+
+    <insert id="save" parameterType="com.farm.pedia.chatbot.domain.Message">
+        INSERT INTO message (id, chatroom_id, question, answer, created_at)
+        VALUES (#{id}, #{chatRoomId}, #{question}, #{answer}, #{createdAt})
+    </insert>
+
+    <select id="findByChatroomId" parameterType="java.lang.Long"
+            resultType="com.farm.pedia.chatbot.domain.Message">
+        SELECT id,
+               chatroom_id as chatroomId,
+               question,
+               answer,
+               created_at as createdAt
+        FROM message
+        WHERE chatroom_id = #{chatRoomId}
+    </select>
+</mapper>

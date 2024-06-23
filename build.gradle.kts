@@ -28,6 +28,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-redis:$springBootVersion")
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:$myBatisVersion")
     implementation("org.springframework.boot:spring-boot-starter-validation:$springBootVersion")
+    // webflux
+    implementation("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
