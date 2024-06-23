@@ -22,4 +22,9 @@ public abstract class AbstractExceptionHandler {
 		log.error("Forbidden Exception: {}", e.getMessage());
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
 	}
+
+	protected final ResponseEntity<String> handleInternalServerError(Exception e) {
+		log.error("Internal Server Error: {}", e.getMessage());
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+	}
 }
