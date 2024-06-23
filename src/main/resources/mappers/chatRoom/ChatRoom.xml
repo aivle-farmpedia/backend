@@ -1,0 +1,45 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.farm.pedia.chatbot.mapper.ChatRoomMapper">
+
+    <resultMap id="ChatRoomResultMap" type="com.farm.pedia.chatbot.domain.ChatRoom">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="recentMsg" column="recent_msg"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="isDeleted" column="is_deleted"/>
+    </resultMap>
+
+    <insert id="save" parameterType="com.farm.pedia.chatbot.domain.ChatRoom">
+        INSERT INTO chat_room (id, user_id, created_at, recent_msg, is_deleted)
+        VALUES (#{id}, #{userId}, #{createdAt}, #{recentMsg}, #{isDeleted})
+    </insert>
+
+    <update id="logicalDelete" parameterType="java.lang.Long">
+        UPDATE chat_room
+        SET is_deleted = TRUE
+        WHERE id = #{id}
+    </update>
+
+    <select id="findByIdAndUserId" parameterType="java.lang.Long"
+            resultMap="ChatRoomResultMap">
+        SELECT id, user_id, recent_msg, created_at, is_deleted
+        FROM chat_room
+        WHERE id = #{id}
+          AND user_id = #{userId}
+          AND is_deleted = FALSE
+    </select>
+
+    <select id="findAllByUserIdAndIsDeletedFalse" parameterType="java.lang.Long"
+            resultMap="ChatRoomResultMap">
+        SELECT id, user_id, recent_msg, created_at, is_deleted
+        FROM chat_room
+        WHERE user_id = #{userId}
+          AND is_deleted = FALSE
+    </select>
+
+    <update id="updateRecentMsg" parameterType="com.farm.pedia.chatbot.domain.ChatRoom">
+        UPDATE chat_room
+        SET recent_msg = #{recentMsg}
+        WHERE id = #{id}
+    </update>
+</mapper>
