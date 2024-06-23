@@ -9,7 +9,7 @@ public class ChatBotResponse {
 	private final String status;
 	private final String message;
 	private final String response;
-	private final List<Dou성ble> similarity_scores;
+	private final List<Double> similarity_scores;
 
 	private ChatBotResponse(String status, String message, String response, List<Double> similarity_scores) {
 		this.status = status;
