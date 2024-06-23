@@ -7,24 +7,52 @@
         VALUES (#{keyword}, #{searchedAt}, #{userId})
     </insert>
 
-<!--  품종 명으로 검색  -->
-    <select id="searchVarietyByName" parameterType="String" resultType="String">
-        SELECT name
-        FROM crops
-        WHERE id IN (
-            SELECT crops_id
-            FROM variety
-            WHERE name = #{keyword}
-        )
+
+    <!-- 자동 완성 쿼리: id와 name만 반환 -->
+    <!-- 품종 명으로 검색 -->
+    <select id="searchVarietyName" parameterType="String" resultType="map">
+        SELECT v.id as id, v.name as name
+        FROM variety v
+        WHERE v.name LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+    <!-- 카테고리로 검색 -->
+    <select id="searchCropsName" parameterType="String" resultType="map">
+        SELECT c.id as id, c.name as name
+        FROM crops c
+        WHERE c.name LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
-<!--  카테고리로 검색  -->
-    <select id="searchCropsByVarietyName" parameterType="String" resultType="String">
-        SELECT name
-        FROM crops
-        WHERE name = #{keyword}
+
+    <!-- 검색 쿼리: 모든 필드 반환 -->
+    <!-- 품종 명으로 검색 -->
+    <select id="searchVarietyDetails" parameterType="String" resultType="map">
+        SELECT v.id as id, v.name as name, v.image_url as imageUrl, c.name as cropName
+        FROM variety v
+                 JOIN crops c ON v.crops_id = c.id
+        WHERE v.name LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+    <!-- 카테고리로 검색 -->
+    <select id="searchCropsDetails" parameterType="String" resultType="map">
+        SELECT c.id as id, c.name as name, c.image_url as imageUrl
+        FROM crops c
+        WHERE c.name LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
+
+
+    <!-- 자동완성 리스트 내 항목 클릭 시 -->
+    <select id="getVarietyDetailsByName" parameterType="String" resultType="map">
+        SELECT v.id as id, v.name as name, v.image_url as imageUrl, c.name as cropName
+        FROM variety v
+                 JOIN crops c ON v.crops_id = c.id
+        WHERE v.name = #{name}
+    </select>
+
+    <select id="getCropsDetailsByName" parameterType="String" resultType="map">
+        SELECT c.id as id, c.name as cropName, c.image_url as imageUrl
+        FROM crops c
+        WHERE c.name = #{name}
+    </select>
 </mapper>
 
 
