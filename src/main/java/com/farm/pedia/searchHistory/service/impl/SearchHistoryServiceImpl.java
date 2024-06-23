@@ -1,4 +1,4 @@
-package com.farm.pedia.searchHistory.impl;
+package com.farm.pedia.searchHistory.service.impl;
 
 import com.farm.pedia.searchHistory.mapper.SearchHistoryMapper;
 import com.farm.pedia.searchHistory.service.SearchHistoryService;
