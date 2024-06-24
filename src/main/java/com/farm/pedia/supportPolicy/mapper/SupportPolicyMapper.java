@@ -1,6 +1,9 @@
 package com.farm.pedia.supportPolicy.mapper;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.swing.text.html.Option;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,5 +17,5 @@ public interface SupportPolicyMapper {
 
 	int countAll();
 
-	SupportPolicy findById(Long policyId);
+	Optional<SupportPolicy> findById(Long policyId);
 }
