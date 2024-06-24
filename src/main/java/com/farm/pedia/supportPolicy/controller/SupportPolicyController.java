@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.farm.pedia.global.dto.response.PagedResponse;
+import com.farm.pedia.supportPolicy.domain.Category;
 import com.farm.pedia.supportPolicy.domain.SimpleSupportPolicy;
 import com.farm.pedia.supportPolicy.domain.SupportPolicy;
 import com.farm.pedia.supportPolicy.dto.response.SupportPolicyResponse;
@@ -31,14 +32,16 @@ public class SupportPolicyController {
 	 * @return
 	 * id : 지원정책 ID
 	 * title : 제목
+	 * category : 카테고리(ALL, EDUCATION, BUSINESS)
 	 */
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	public PagedResponse<SimpleSupportPolicy> findAll(
 		@Min(value = 1, message = "페이지 값은 최소 1이어야 합니다.") @RequestParam(defaultValue = "1") int page,
-		@Min(value = 1, message = "크기 값은 최소 1이어야 합니다.") @RequestParam(defaultValue = "10") int size
+		@Min(value = 1, message = "크기 값은 최소 1이어야 합니다.") @RequestParam(defaultValue = "10") int size,
+		@RequestParam(defaultValue = "ALL") Category category
 	) {
-		return supportPolicyService.findAll(page, size);
+		return supportPolicyService.findAll(page, size, category);
 	}
 
 	/**

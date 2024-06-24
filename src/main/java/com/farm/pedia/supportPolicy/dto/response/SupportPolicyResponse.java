@@ -16,11 +16,11 @@ public class SupportPolicyResponse {
 	private final LocalDate applyEnd;
 	private final String chargeAgency;
 	private final String eduTarget;
-	private final int price;
+	private final Integer price;
 	private final String infoUrl;
 
 	private SupportPolicyResponse(Long id, String title, String content, LocalDate applyStart, LocalDate applyEnd,
-		String chargeAgency, String eduTarget, int price, String infoUrl) {
+		String chargeAgency, String eduTarget, Integer price, String infoUrl) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
