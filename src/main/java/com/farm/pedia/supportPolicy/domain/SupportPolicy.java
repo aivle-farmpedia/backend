@@ -14,10 +14,10 @@ public class SupportPolicy {
 	private final LocalDate applyEnd;
 	private final String chargeAgency;
 	private final String eduTarget;
-	private final int price;
+	private final Integer price;
 	private final String infoUrl;
 
-	private SupportPolicy(Long id, String title, String content, LocalDate applyStart, LocalDate applyEnd, String chargeAgency, String eduTarget, int price, String infoUrl) {
+	private SupportPolicy(Long id, String title, String content, LocalDate applyStart, LocalDate applyEnd, String chargeAgency, String eduTarget, Integer price, String infoUrl) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
