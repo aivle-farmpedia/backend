@@ -6,6 +6,9 @@
         SELECT id, title
         FROM support_policy
         WHERE applyEnd >= NOW()
+        <if test="category != '전체'">
+            AND category_id = (SELECT id FROM support_policy_category WHERE name = #{category})
+        </if>
         ORDER BY applyStart DESC
         LIMIT #{limit} OFFSET #{offset}
     </select>
@@ -14,11 +17,15 @@
         SELECT COUNT(*)
         FROM support_policy
         WHERE applyEnd >= NOW()
+        <if test="category != '전체'">
+            AND category_id = (SELECT id FROM support_policy_category WHERE name = #{category})
+        </if>
     </select>
 
     <select id="findById" resultType="com.farm.pedia.supportPolicy.domain.SupportPolicy">
         SELECT *
         FROM support_policy
-        WHERE id = #{id} AND applyEnd >= NOW()
+        WHERE id = #{id}
+          AND applyEnd >= NOW()
     </select>
 </mapper>
