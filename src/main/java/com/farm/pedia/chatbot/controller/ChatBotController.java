@@ -9,6 +9,7 @@ import com.farm.pedia.auth.config.UserLogin;
 import com.farm.pedia.chatbot.domain.ChatRoom;
 import com.farm.pedia.chatbot.domain.Message;
 import com.farm.pedia.chatbot.dto.request.ChatBotRequest;
+import com.farm.pedia.chatbot.dto.response.ChatBotCreateResponse;
 import com.farm.pedia.chatbot.service.ChatBotService;
 import com.farm.pedia.user.domain.User;
 
@@ -39,9 +40,11 @@ public class ChatBotController {
 
 	@PostMapping("/chat-rooms")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createChatRoom(@UserLogin User user) {
+	public ChatBotCreateResponse createChatRoom(@UserLogin User user) {
 		log.info("유저 {}의 채팅방 생성", user.getId());
-		chatBotService.createChatRoom(user);
+		ChatRoom chatRoom = chatBotService.createChatRoom(user);
+
+		return ChatBotCreateResponse.of(chatRoom.getId());
 	}
 
 	@PostMapping("/chat-rooms/{chatroomId}/messages")

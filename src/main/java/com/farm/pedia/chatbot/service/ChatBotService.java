@@ -40,9 +40,11 @@ public class ChatBotService {
 		return messageMapper.findByChatroomId(chatroomId);
 	}
 
-	public void createChatRoom(User user) {
+	public ChatRoom createChatRoom(User user) {
 		ChatRoom chatRoom = ChatRoom.of(user.getId());
 		chatRoomMapper.save(chatRoom);
+
+		return chatRoomMapper.findByUserIdAndRecentChatRoom(user.getId());
 	}
 
 	@Transactional
