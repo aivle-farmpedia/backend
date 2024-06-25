@@ -49,7 +49,7 @@
         FROM chat_room
         WHERE user_id = #{userId}
           AND is_deleted = FALSE
-        ORDER BY created_at ASC
+        ORDER BY created_at DESC
         LIMIT 1
     </select>
 </mapper>
