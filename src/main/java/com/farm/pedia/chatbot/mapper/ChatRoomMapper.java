@@ -19,4 +19,6 @@ public interface ChatRoomMapper {
 	List<ChatRoom> findAllByUserIdAndIsDeletedFalse(Long userId);
 
 	void updateRecentMsg(Long id, String recentMsg);
+
+	ChatRoom findByUserIdAndRecentChatRoom(Long userId);
 }

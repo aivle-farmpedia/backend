@@ -42,4 +42,14 @@
         SET recent_msg = #{recentMsg}
         WHERE id = #{id}
     </update>
+
+    <select id="findByUserIdAndRecentChatRoom" parameterType="java.lang.Long"
+            resultMap="ChatRoomResultMap">
+        SELECT id, user_id, recent_msg, created_at, is_deleted
+        FROM chat_room
+        WHERE user_id = #{userId}
+          AND is_deleted = FALSE
+        ORDER BY created_at DESC
+        LIMIT 1
+    </select>
 </mapper>
