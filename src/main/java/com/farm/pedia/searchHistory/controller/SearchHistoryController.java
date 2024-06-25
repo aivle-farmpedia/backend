@@ -35,6 +35,7 @@ public class SearchHistoryController {
     @PostMapping("/select")
     @ResponseStatus(HttpStatus.OK)
     public Map<String, Object> selectAndSave(@UserLogin User user, @Valid @NotBlank(message = "검색은 2글자 이상만 가능합니다.") @RequestParam("name") String name) {
+        searchHistoryService.saveSearchKeyword(user.getId(), name);
         Map<String, Object> result = searchHistoryService.getDetailsAndSave(user.getId(), name);
         log.info("선택한 항목의 상세 정보: {}", result);
         return result;
@@ -44,7 +45,7 @@ public class SearchHistoryController {
     // 검색 & 상세 정보 가져오기
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Map<String, Object>> searchAndSave(@UserLogin User user, @Valid @NotBlank(message = "검색은 2글자 이상만 가능합니다.") String keyword) {
+    public List<Map<String, Object>> searchAndSave(@UserLogin User user, @Valid @NotBlank(message = "검색은 2글자 이상만 가능합니다.") @RequestParam("keyword") String keyword) {
         // 검색어 저장
         searchHistoryService.saveSearchKeyword(user.getId(), keyword);
 
@@ -65,9 +66,9 @@ public class SearchHistoryController {
         return recentKeywords;
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteSearchKeyword(@UserLogin User user, @Valid @NotBlank @RequestParam String keyword) {
+    public void deleteSearchKeyword(@UserLogin User user, @Valid @NotBlank @RequestParam("keyword") String keyword) {
         searchHistoryService.deleteSearchKeyword(user.getId(), keyword);
         log.info("User ID {}의 검색어 '{}'가 삭제되었습니다.", user.getId(), keyword);
     }

@@ -21,7 +21,6 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
     private static final String REDIS_RECENT_SEARCH_KEY = "recentSearch:";
     private final SearchHistoryMapper searchHistoryMapper;
     private final RedisTemplate<String, String> redisTemplate;
-    SearchHistoryService self;
 
     @Transactional
     @Override
@@ -48,21 +47,19 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
     @Transactional
     @Override
     public Map<String, Object> getDetailsAndSave(Long userId, String name) {
-        // 검색어 저장
-
-        self.saveSearchKeyword(userId, name);
-
         // variety 테이블에서 검색
         Map<String, Object> varietyDetails = searchHistoryMapper.getVarietyDetailsByName(name);
-        if (!varietyDetails.isEmpty()) {
+        if (varietyDetails != null && !varietyDetails.isEmpty()) {
             return varietyDetails;
         }
 
         // crops 테이블에서 검색
         Map<String, Object> cropsDetails = searchHistoryMapper.getCropsDetailsByName(name);
-        if (!cropsDetails.isEmpty()) {
+        if (cropsDetails != null && !cropsDetails.isEmpty()) {
             return cropsDetails;
         }
+
+        // 검색 결과가 없을 경우 빈 맵 반환
         return Map.of();
     }
 

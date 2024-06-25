@@ -54,8 +54,3 @@
         WHERE c.name = #{name}
     </select>
 </mapper>
-
-
-
-
-
