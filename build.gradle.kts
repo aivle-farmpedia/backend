@@ -39,6 +39,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:$myBatisVersion")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:$junitPlatformVersion")
+
+    // thymeleaf
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:$springBootVersion")
 }
 
 tasks.withType<Test> {

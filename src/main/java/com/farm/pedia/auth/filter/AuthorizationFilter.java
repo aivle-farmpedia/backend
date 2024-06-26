@@ -30,6 +30,11 @@ public class AuthorizationFilter implements Filter {
 			return;
 		}
 
+		if (isPrivacyURI(requestURI)) {
+			filterChain.doFilter(request, response);
+			return;
+		}
+
 		String uuid = request.getHeader(AUTHORIZATION);
 
 		if (uuid == null) {
@@ -46,5 +51,9 @@ public class AuthorizationFilter implements Filter {
 
 	private boolean isLoginURI(String requestURI) {
 		return requestURI.startsWith("/api/auth");
+	}
+
+	private boolean isPrivacyURI(String requestURI) {
+		return requestURI.startsWith("/privacy");
 	}
 }
