@@ -25,12 +25,7 @@ public class AuthorizationFilter implements Filter {
 
 		String requestURI = request.getRequestURI();
 
-		if (isLoginURI(requestURI)) {
-			filterChain.doFilter(request, response);
-			return;
-		}
-
-		if (isPrivacyURI(requestURI)) {
+		if (isExcludedURI(requestURI)) {
 			filterChain.doFilter(request, response);
 			return;
 		}
@@ -49,11 +44,7 @@ public class AuthorizationFilter implements Filter {
 		filterChain.doFilter(request, response);
 	}
 
-	private boolean isLoginURI(String requestURI) {
-		return requestURI.startsWith("/api/auth");
-	}
-
-	private boolean isPrivacyURI(String requestURI) {
-		return requestURI.startsWith("/privacy");
+	private boolean isExcludedURI(String requestURI) {
+		return requestURI.startsWith("/api/auth") || requestURI.startsWith("/privacy") || requestURI.startsWith("/download");
 	}
 }
