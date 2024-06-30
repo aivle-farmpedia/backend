@@ -11,20 +11,10 @@ import com.farm.pedia.auth.filter.AuthorizationFilter;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilter() {
-        FilterRegistrationBean<CorsFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-        filterRegistrationBean.setFilter(new CorsFilter());
-        filterRegistrationBean.setOrder(1);
-        filterRegistrationBean.addUrlPatterns("/*");
-
-        return filterRegistrationBean;
-    }
-
-    @Bean
     public FilterRegistrationBean<AuthorizationFilter> filter() {
         FilterRegistrationBean<AuthorizationFilter> filterRegistrationBean = new FilterRegistrationBean<>();
         filterRegistrationBean.setFilter(new AuthorizationFilter());
-        filterRegistrationBean.setOrder(2);
+        filterRegistrationBean.setOrder(1);
         filterRegistrationBean.addUrlPatterns("/*");
 
         return filterRegistrationBean;
